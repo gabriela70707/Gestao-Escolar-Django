@@ -12,6 +12,6 @@ class LoginSerializer(TokenObtainPairSerializer):
         data = super().validate(attrs)
         data['usuario'] = {
             'username' : self.user.username,
-            'categoria' : self.user.categoria
+            'cargo' : self.user.cargo
         }
         return data

@@ -4,10 +4,10 @@ from django.contrib.auth.admin import UserAdmin
 
 class UsuarioAdmin(UserAdmin):
     fieldsets = UserAdmin.fieldsets + (
-        ('Novos campos', {'fields':('categoria',)}),
+        ('Novos campos', {'fields':('cargo',)}),
     )
     add_fieldsets = UserAdmin.add_fieldsets + (
-        ("Categoria", {'fields':('categoria',)}),
+        ("Cargo", {'fields':('cargo',)}),
     )
 
 admin.site.register(Usuario, UsuarioAdmin)
