@@ -8,7 +8,7 @@ class Usuario(AbstractUser):
     ]
 
     cargo = models.CharField(max_length=1, choices=CARGO, default='P')
-    NI = models.CharField(max_length=5)
+    NI = models.CharField(max_length=5) #numero de identificação
     nome = models.CharField(max_length=25)
     email = models.CharField(max_length=50)
     telefone = models.CharField(max_length=11)
