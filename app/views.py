@@ -4,6 +4,8 @@ from rest_framework.generics import ListCreateAPIView,RetrieveUpdateDestroyAPIVi
 from .serializers import LoginSerializer, UsuarioSerializer, AmbienteSerializer, DisciplinasSerializer
 from .permissions import IsGestor, IsProfessor
 from rest_framework.viewsets import ReadOnlyModelViewSet #permite somente o metodo GET
+from rest_framework.response import Response
+from rest_framework import status
 
 
 #conseguir o token de acesso
@@ -17,6 +19,10 @@ class ProfessorListCreateApiView(ListCreateAPIView):
     serializer_class = UsuarioSerializer
     permission_classes = [IsGestor]
 
+    def create(self, request, *args, **kwargs):
+        response = super().create(request, *args, **kwargs)  # Executa a lógica padrão de criação
+        return Response({"message": "Professor registrado com sucesso!"}, status=status.HTTP_201_CREATED)
+
 #atualizar e excluir professores
 class ProfessorDeleteUpdate(RetrieveUpdateDestroyAPIView):
     queryset = Usuario.objects.filter(cargo='P') #mostrar apenas os professores
@@ -24,11 +30,24 @@ class ProfessorDeleteUpdate(RetrieveUpdateDestroyAPIView):
     permission_classes = [IsGestor]
     lookup_field = 'pk'
 
+    #Reescrevendo as funções para retornarem um mansagem ao usuario
+    def update(self, request, *args, **kwargs):
+        response = super().update(request, *args, **kwargs)  # Chama a lógica padrão do Django
+        return Response({"message": "Dados do Professor atualizado com sucesso!"}, status=status.HTTP_200_OK)
+
+    def destroy(self, request, *args, **kwargs):
+        super().destroy(request, *args, **kwargs)  # Executa a exclusão normalmente
+        return Response({"message": "Registro do professor excluido com sucesso!"}, status=status.HTTP_204_NO_CONTENT) 
+
 #visualizar e cadastrar reserva de ambientes
 class AmbientesListCreateApiView(ListCreateAPIView):
     queryset = ReservaDeAmbiente.objects.all()
     serializer_class = AmbienteSerializer
     permission_classes = [IsGestor]
+
+    def create(self, request, *args, **kwargs):
+        response = super().create(request, *args, **kwargs)  # Executa a lógica padrão de criação
+        return Response({"message": "Reserva realizada com sucesso!"}, status=status.HTTP_201_CREATED)
 
 #atualizar e excluit reserva de ambientes
 class AmbientesDeleteUpdate(RetrieveUpdateDestroyAPIView):
@@ -37,12 +56,24 @@ class AmbientesDeleteUpdate(RetrieveUpdateDestroyAPIView):
     permission_classes = [IsGestor]
     lookup_field = 'pk'
 
+    def update(self, request, *args, **kwargs):
+        response = super().update(request, *args, **kwargs)  
+        return Response({"message": "Reserva atualizada com sucesso!"}, status=status.HTTP_200_OK)
+
+    def destroy(self, request, *args, **kwargs):
+        super().destroy(request, *args, **kwargs)  
+        return Response({"message": "Reserva excluída com sucesso!"}, status=status.HTTP_204_NO_CONTENT) 
+
 
 #visualizar e cadastrar disciplinas
 class DisciplinasListCreateApiView(ListCreateAPIView):
     queryset = Disciplina.objects.all()
     serializer_class = DisciplinasSerializer
     permission_classes = [IsGestor]
+
+    def create(self, request, *args, **kwargs):
+        response = super().create(request, *args, **kwargs)  # Executa a lógica padrão de criação
+        return Response({"message": "Disciplina registrada com sucesso!"}, status=status.HTTP_201_CREATED)
 
 
 #atualizar e excluir disciplinas
@@ -51,6 +82,15 @@ class DisciplinasDeleteUpdate(RetrieveUpdateDestroyAPIView):
     serializer_class = DisciplinasSerializer
     permission_classes = [IsGestor]
     lookup_field = 'pk'
+
+    def update(self, request, *args, **kwargs):
+        response = super().update(request, *args, **kwargs)  # Chama a lógica padrão do Django
+        return Response({"message": "Disciplina atualizada com sucesso!"}, status=status.HTTP_200_OK)
+
+    def destroy(self, request, *args, **kwargs):
+        super().destroy(request, *args, **kwargs)  # Executa a exclusão normalmente
+        return Response({"message": "Disciplina excluída com sucesso!"}, status=status.HTTP_204_NO_CONTENT) 
+    
 
 
 
