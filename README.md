@@ -17,3 +17,13 @@ as informações relacionadas às suas Disciplinas e aos ambientes reservados pa
 possibilidade de realizar alterações.
 Os professores terão acesso restrito à visualização das informações
 pertinentes às suas atividades.
+
+professorres/
+perfessores/id
+disciplina
+displina id 
+reservaAmbirente
+reservevarAmbiente/id
+professoresREservas
+ProfessoresDisciplias
+token/
