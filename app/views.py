@@ -6,9 +6,10 @@ from .permissions import IsGestor, IsProfessor
 from rest_framework.viewsets import ReadOnlyModelViewSet #permite somente o metodo GET
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.exceptions import ValidationError #estou usando para validar se já existe uma reserva em determinada data e horario 
 
 
-#conseguir o token de acesso
+#conseguir o token de acesso (login)
 class LoginView(TokenObtainPairView):
     serializer_class = LoginSerializer
 
@@ -40,14 +41,34 @@ class ProfessorDeleteUpdate(RetrieveUpdateDestroyAPIView):
         return Response({"message": "Registro do professor excluido com sucesso!"}, status=status.HTTP_204_NO_CONTENT) 
 
 #visualizar e cadastrar reserva de ambientes
+from rest_framework.exceptions import ValidationError
+
 class AmbientesListCreateApiView(ListCreateAPIView):
     queryset = ReservaDeAmbiente.objects.all()
     serializer_class = AmbienteSerializer
     permission_classes = [IsGestor]
 
     def create(self, request, *args, **kwargs):
-        response = super().create(request, *args, **kwargs)  # Executa a lógica padrão de criação
+        data_inicio = request.data.get("data_inicio")
+        data_termino = request.data.get("data_termino")
+        periodo = request.data.get("periodo")
+        sala_reservada = request.data.get("sala_reservada")
+
+        # Verifica se já existe uma reserva exatamente na mesma data, sala e período
+        reserva_existente = ReservaDeAmbiente.objects.filter(
+            sala_reservada=sala_reservada,
+            periodo=periodo,
+            data_inicio=data_inicio,
+            data_termino=data_termino
+        ).exists()
+
+        if reserva_existente:
+            raise ValidationError({"message": "Já existe uma reserva para essa sala, período e data."})
+
+        response = super().create(request, *args, **kwargs)
         return Response({"message": "Reserva realizada com sucesso!"}, status=status.HTTP_201_CREATED)
+
+
 
 #atualizar e excluit reserva de ambientes
 class AmbientesDeleteUpdate(RetrieveUpdateDestroyAPIView):
@@ -120,4 +141,5 @@ disciplina_professor → Aponta para Disciplina.
 professor_responsavel → Aponta para Usuario dentro de Disciplina.
 
 usuario → O professor autenticado.
+
 """
