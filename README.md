@@ -37,7 +37,8 @@ Para rodar o projeto basta clona-lo
 No terminal da sua maquina:
 ```git clone <URL_DO_REPOSITORIO>```
 ```cd nome_do_projeto```
-`code .`  (Para abrir no VsCode, caso nao tenha instalado, instale e execute o comando novamente)
+```code .```
+(Para abrir no VsCode, caso nao tenha instalado, instale e execute o comando novamente)
 
 **Após isso, criar a env e ativa-lá:**
 
