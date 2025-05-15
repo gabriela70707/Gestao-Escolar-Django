@@ -18,7 +18,7 @@ possibilidade de realizar alterações.
 Os professores terão acesso restrito à visualização das informações
 pertinentes às suas atividades.
 
-# EndPoint's:
+## EndPoint's:
 
 token/ - login 
 professores/  - consultar e cadastrar professores (de acordo com a permissão)
@@ -75,5 +75,5 @@ pip install -r requirements.txt
 **✅ Pronto! Agora basta acessar as URLs desejadas. 🚀😃**
 
 
-# Link da Documentação completa - (documentado no Postman) 📚✨:
+## Link da Documentação completa - (documentado no Postman) 📚✨:
 https://documenter.getpostman.com/view/41931886/2sB2qWF3HB
