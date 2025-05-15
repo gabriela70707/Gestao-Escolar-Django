@@ -1,6 +1,6 @@
 ## Sistema que permitirá aos:
 
-## Gestores:
+## Gestores 👩‍💻👨‍💻:
 
 Gerenciarem de maneira eficiente o cadastro de professores, Disciplinas e reservas de salas.
 O gestor será responsável por cadastrar, visualizar, atualizar e excluir informações relacionadas aos
@@ -10,7 +10,7 @@ Os Gestores podem cadastrar, visualizar, atualizar e excluir informações sobre
 Além disso, o sistema oferecerá funcionalidades de autenticação para garantir que apenas os gestores possam realizar
 essas operações.
 
-## Professores:
+## Professores👨‍🏫👩‍🏫:
 
 Por outro lado, os professores terão acesso ao sistema de forma mais restrita, podendo apenas visualizar
 as informações relacionadas às suas Disciplinas e aos ambientes reservados para suas aulas, sem a
@@ -18,7 +18,7 @@ possibilidade de realizar alterações.
 Os professores terão acesso restrito à visualização das informações
 pertinentes às suas atividades.
 
-## EndPoint's:
+## EndPoint's ⚡:
 
 token/ - login 
 professores/  - consultar e cadastrar professores (de acordo com a permissão)
@@ -30,7 +30,7 @@ reservaAmbiente/<int:pk>/ - atualizar e deletar disciplinas (de acordo com a per
 professoresReservas/ - professor consulta suas reservas
 professoresDisciplinas/ - professor consulta suas disciplinas
 
-# Como Rodar o Projeto - (Back-End):
+# Como Rodar o Projeto - (Back-End)🚀:
 
 ** 1️⃣ Clonando o Projeto**
 Para rodar o projeto basta clona-lo 
