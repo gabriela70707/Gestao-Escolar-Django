@@ -1,55 +1,50 @@
-import { useNavigate } from "react-router-dom";
-import styles from './Login.module.css';
+import { useState } from "react";
+import stylesLogin from './Login.module.css';
 
 function Login() {
-  const navigate = useNavigate();
-
-  const handleLogin = () => {
-    navigate("/home"); 
-  };
+  const [isActive, setIsActive] = useState(false);
 
   return (
-    <div className={styles.container}>
-        <div className={styles.form-container + styles.professor}>
-            <form>
-                    <h1>Gestor</h1>
-                    <input type="text" placeholder="Nome Usuario"/>
-                    <input type="text" placeholder="Senha"/>
-                    <button>Professor</button>
+    <div className={stylesLogin.main}>
+        <div className={stylesLogin.container + (isActive ? " " + stylesLogin.active : "")}>
+            
+            <div className={stylesLogin.formContainer + " " + stylesLogin.gestor}>
+                <form>
+                    <h1>Logar como Gestor(a)</h1>
+                    <span>Use seu nome de Usuário</span>
+                    <input type="text" placeholder="Nome de Usuário" />
+                    <input type="password" placeholder="Password" />
+                    <button>Entrar</button>
                 </form>
-        </div>
+            </div>
 
-        <div className={styles.form-container + styles.gestor}>
-                 <form>
-                    <h1>Professor</h1>
-                    <input type="text" placeholder="Nome Usuario"/>
-                    <input type="text" placeholder="Senha"/>
-                    <button>Gestor</button>
+            
+            <div className={stylesLogin.formContainer + " " + stylesLogin.professor}>
+                <form>
+                    <h1>Logar como Professor(a)</h1>
+                    <span>Use seu nome de Usuário</span>
+                    <input type="text" placeholder="Nome de Usuário" />
+                    <input type="password" placeholder="Password" />
+                    <button>Entrar</button>
                 </form>
-        </div>
+            </div>
 
-        <div className={styles.toggle-container}>
-            <div className={styles.toggle}>
-                <div className={styles.toogle-panel + styles.toggle-left}>
-                    <h1>Bem-Vindo Gestor(a)</h1>
-                    <p>ajdlasjdlaksjdlasjdlasdjasldj</p>
-                    <button onClick={handleLogin}>Entrar</button>
+            
+            <div className={stylesLogin.toggleContainer}>
+                <div className={stylesLogin.toggle}>
+                    <div className={stylesLogin.togglePanel + " " + stylesLogin.toggleLeft}>
+                        <h1>É professor(a)?</h1>
+                        <p>Clique no botão abaixo:</p>
+                        <button className={stylesLogin.hidden} onClick={() => setIsActive(false)}>Sou Professor</button>
+                    </div>
+                    <div className={stylesLogin.togglePanel + " " + stylesLogin.toggleRight}>
+                        <h1>É Gestor(a)?</h1>
+                        <p>Clique no botão abaixo:</p>
+                        <button className={stylesLogin.hidden} onClick={() => setIsActive(true)}>Sou Gestor</button>
+                    </div>
                 </div>
             </div>
         </div>
-
-
-        <div className={styles.toggle-container}>
-            <div className={styles.toggle}>
-                <div className={styles.toogle-panel + styles.toggle-right}>
-                    <h1>Bem-Vindo Professor(a)</h1>
-                    <p>ajdlasjdlaksjdlasjdlasdjasldj</p>
-                    <button onClick={handleLogin}>Entrar</button>
-                </div>
-            </div>
-        </div>
-
-
     </div>
   );
 }
