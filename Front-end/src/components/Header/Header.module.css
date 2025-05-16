@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+.container {
+    background-color: rgb(217, 223, 228);
+    box-shadow: 0 5px 10px rgba(78, 76, 73, 0.1);
+    height: 15vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative; /* ajuda com z-index */
+    z-index: 10; /* garante que fique acima de outros elementos */
+}
+
+
+h1 {
+    font-size: 30px;
+    color: rgb(68, 63, 63);
+    margin-right: 4vw;
+    font-family: 'Poppins', sans-serif;
+    margin-left: 50px;
+    justify-content: center;
+    text-align: center;
+}
