@@ -10,6 +10,7 @@
     'opcoes imagem';
     justify-content: start;
     align-items: center;
+
     
 }
 
@@ -36,6 +37,7 @@
     width: 20vw;
     height: 17vh;
     border-radius: 2vh;
+
     background-color: rgb(255, 255, 255);
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
 }
@@ -48,6 +50,7 @@
     border-radius: 2vh;
     background-color: rgb(255, 255, 255);
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+
 }
 
 .disciplina{
@@ -58,6 +61,7 @@
     border-radius: 2vh;
     background-color: rgb(255, 255, 255);
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+
 }
 
 .ambiente{
@@ -68,6 +72,7 @@
     border-radius: 2vh;
     background-color: rgb(255, 255, 255);
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+
 }
 
 
