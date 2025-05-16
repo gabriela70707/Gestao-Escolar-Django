@@ -3,6 +3,7 @@ import professorImagem from '../../assets/professores.png'
 import disciplinaImagem from '../../assets/disciplinas.png'
 import gestorImagem from '../../assets/gestor.png'
 import ambienteImagem from '../../assets/ambiente.png'
+import site from '../../assets/site.png'
 
 export function Menu() {
     return (
@@ -42,6 +43,13 @@ export function Menu() {
                         </div>
                     </div>
             </div>
+
+            <div className={styles.imagem}>
+                <img src={site} alt="Garota com livro na mão"/>
+            </div>
+        
         </div>
+
+
     )
 }

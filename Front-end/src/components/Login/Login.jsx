@@ -1,8 +1,11 @@
 import { useState } from "react";
 import stylesLogin from './Login.module.css';
+import { useNavigate } from "react-router-dom";
 
 function Login() {
   const [isActive, setIsActive] = useState(false);
+
+  const navigate = useNavigate()
 
   return (
     <div className={stylesLogin.main}>
@@ -25,7 +28,7 @@ function Login() {
                     <span>Use seu nome de Usuário</span>
                     <input type="text" placeholder="Nome de Usuário" />
                     <input type="password" placeholder="Password" />
-                    <button>Entrar</button>
+                    <button onClick={() => navigate("/home")}>Entrar</button>
                 </form>
             </div>
 

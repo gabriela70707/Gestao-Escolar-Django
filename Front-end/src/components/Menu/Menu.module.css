@@ -3,20 +3,30 @@
 /*Ajeitar o css para agrupar classes caso isso não atrapalhe para puxar o backend*/
 
 .container {
-    width: 96%;
-    height: 80%;
+    width: 70%;
+    height: 90%;
     display: grid;
-    justify-content: center;
+    grid-template-areas: 
+    'opcoes imagem';
+    justify-content: start;
     align-items: start;
+    
 }
 
 .icones {
     display: grid;
+    grid-area: "opcoes";
     grid-template-columns: 2fr 2fr;
     width: 50vw;
     height: 60vh;
     justify-items: center;
     align-items: center;
+}
+
+.imagem img{
+    grid-area: "imagem";
+    height: 60vh;
+    margin-left: 82px;
 }
 
 
