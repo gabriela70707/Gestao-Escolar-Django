@@ -11,7 +11,18 @@ from rest_framework.exceptions import ValidationError #estou usando para validar
 
 #conseguir o token de acesso (login)
 class LoginView(TokenObtainPairView):
-    serializer_class = LoginSerializer
+    def post(self, request, *args, **kwargs):
+        response = super().post(request, *args, **kwargs)
+
+        if response.status_code == status.HTTP_200_OK:
+            username = request.data.get("username")
+            usuario = Usuario.objects.filter(username=username).first()
+
+            if usuario:
+                cargo = "gestor" if usuario.cargo == "G" else "professor"
+                response.data["cargo"] = cargo  # Adiciona o cargo à resposta
+
+        return response
 
 
 #visualizar e cadastrar professores
