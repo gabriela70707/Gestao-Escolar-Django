@@ -9,6 +9,7 @@ from rest_framework import status
 from rest_framework.exceptions import ValidationError #estou usando para validar se já existe uma reserva em determinada data e horario 
 
 
+
 #conseguir o token de acesso (login)
 class LoginView(TokenObtainPairView):
     def post(self, request, *args, **kwargs):
@@ -32,8 +33,44 @@ class ProfessorListCreateApiView(ListCreateAPIView):
     permission_classes = [IsGestor]
 
     def create(self, request, *args, **kwargs):
-        response = super().create(request, *args, **kwargs)  # Executa a lógica padrão de criação
+        usuario_data = request.data
+        usuario_data["cargo"] = "P"  # Definir o cargo automaticamente
+
+        usuario = Usuario(**usuario_data)
+        usuario.set_password(request.data["password"])  # 🔑 Criptografa a senha corretamente
+        usuario.save()
+
         return Response({"message": "Professor registrado com sucesso!"}, status=status.HTTP_201_CREATED)
+    
+    def get_permissions(self):
+        # Permitir que professores e gestores vejam a lista
+        if self.request.method == "GET":
+            return []
+        return [IsGestor()]
+    
+
+#visualizar e cadastrar gestores
+class GestorListCreateApiView(ListCreateAPIView):
+    queryset = Usuario.objects.filter(cargo='G') 
+    serializer_class = UsuarioSerializer
+    permission_classes = [IsGestor]
+
+    def create(self, request, *args, **kwargs):
+        usuario_data = request.data
+        usuario_data["cargo"] = "G"  # Definir o cargo automaticamente
+
+        usuario = Usuario(**usuario_data)
+        usuario.set_password(request.data["password"])  # 🔑 Criptografa a senha corretamente
+        usuario.save()
+
+        return Response({"message": "Gestor registrado com sucesso!"}, status=status.HTTP_201_CREATED)
+    
+    def get_permissions(self):
+        if self.request.method == "GET":
+            return []
+        return [IsGestor()]
+
+
 
 #atualizar e excluir professores
 class ProfessorDeleteUpdate(RetrieveUpdateDestroyAPIView):
@@ -51,9 +88,28 @@ class ProfessorDeleteUpdate(RetrieveUpdateDestroyAPIView):
         super().destroy(request, *args, **kwargs)  # Executa a exclusão normalmente
         return Response({"message": "Registro do professor excluido com sucesso!"}, status=status.HTTP_204_NO_CONTENT) 
 
-#visualizar e cadastrar reserva de ambientes
-from rest_framework.exceptions import ValidationError
 
+#atualizar e excluir gestores
+class GestorDeleteUpdate(RetrieveUpdateDestroyAPIView):
+    queryset = Usuario.objects.filter(cargo='G') 
+    serializer_class = UsuarioSerializer
+    permission_classes = [IsGestor]
+    lookup_field = 'pk'
+
+    #Reescrevendo as funções para retornarem um mansagem ao usuario
+    def update(self, request, *args, **kwargs):
+        response = super().update(request, *args, **kwargs)  # Chama a lógica padrão do Django
+        return Response({"message": "Dados do Gestor atualizado com sucesso!"}, status=status.HTTP_200_OK)
+
+    def destroy(self, request, *args, **kwargs):
+        super().destroy(request, *args, **kwargs)  # Executa a exclusão normalmente
+        return Response({"message": "Registro do gestor excluido com sucesso!"}, status=status.HTTP_204_NO_CONTENT) 
+
+
+
+
+
+#visualizar e cadastrar reserva de ambientes
 class AmbientesListCreateApiView(ListCreateAPIView):
     queryset = ReservaDeAmbiente.objects.all()
     serializer_class = AmbienteSerializer
@@ -65,7 +121,10 @@ class AmbientesListCreateApiView(ListCreateAPIView):
         periodo = request.data.get("periodo")
         sala_reservada = request.data.get("sala_reservada")
 
-        # Verifica se já existe uma reserva exatamente na mesma data, sala e período
+        # 🔍 Debugando a requisição
+        print(f"Recebendo reserva: {request.data}")
+
+        # Verifica se já existe uma reserva na mesma data, sala e período
         reserva_existente = ReservaDeAmbiente.objects.filter(
             sala_reservada=sala_reservada,
             periodo=periodo,
@@ -74,10 +133,20 @@ class AmbientesListCreateApiView(ListCreateAPIView):
         ).exists()
 
         if reserva_existente:
-            raise ValidationError({"message": "Já existe uma reserva para essa sala, período e data."})
+            return Response({"message": "Já existe uma reserva para essa sala, período e data."}, status=status.HTTP_400_BAD_REQUEST)
 
-        response = super().create(request, *args, **kwargs)
-        return Response({"message": "Reserva realizada com sucesso!"}, status=status.HTTP_201_CREATED)
+        # Criando a reserva manualmente para garantir acesso aos dados
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        reserva = serializer.save()
+
+        # 🔍 Debugando a resposta
+        print(f"Reserva criada: {serializer.data}")
+
+        return Response({"message": "Reserva realizada com sucesso!", "reserva": serializer.data}, status=status.HTTP_201_CREATED)
+    
+    
+
 
 
 

@@ -7,10 +7,17 @@ class UsuarioSerializer(serializers.ModelSerializer): #precisa definir username 
         model = Usuario
         fields = '__all__'
 
+        
 class AmbienteSerializer(serializers.ModelSerializer):
+    disciplina_nome = serializers.CharField(source="disciplina_professor.nome", read_only=True)
+    disciplina_professor = serializers.PrimaryKeyRelatedField(queryset=Disciplina.objects.all())  # Permite entrada
+
     class Meta:
         model = ReservaDeAmbiente
-        fields = '__all__'
+        fields = ["id", "data_inicio", "data_termino", "periodo", "sala_reservada", "disciplina_professor", "disciplina_nome"]
+
+
+    
 
 class DisciplinasSerializer(serializers.ModelSerializer):
     class Meta:

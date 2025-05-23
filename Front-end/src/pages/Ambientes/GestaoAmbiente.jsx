@@ -1,0 +1,144 @@
+import { useEffect, useState } from "react";
+import api from "../../../service/api";
+
+function GestaoAmbientes() {
+  const [ambientes, setAmbientes] = useState([]);
+  const [dataInicio, setDataInicio] = useState("");
+  const [dataTermino, setDataTermino] = useState("");
+  const [periodo, setPeriodo] = useState("M"); // Default: Manhã
+  const [salaReservada, setSalaReservada] = useState("1"); // Default: Sala 1
+  const [disciplinaProfessor, setDisciplinaProfessor] = useState("");
+  const [disciplinas, setDisciplinas] = useState([]);
+  const [editingId, setEditingId] = useState(null);
+
+  // 📌 Recuperar cargo do usuário logado
+  const cargoUsuario = localStorage.getItem("cargo"); // "gestor" ou "professor"
+
+  // 📌 Função para carregar lista de ambientes
+  const carregarAmbientes = () => {
+    const endpoint = cargoUsuario === "gestor" ? "/reservaAmbiente/" : "/professoresReservas/";
+    
+    api.get(endpoint)
+      .then((res) => {
+        console.log("Ambientes carregados:", res.data);
+        setAmbientes(res.data || []);
+      })
+      .catch((err) => console.error("Erro ao buscar ambientes:", err));
+  };
+
+  // 📌 Carregar lista de ambientes ao iniciar e após reserva/exclusão
+  useEffect(() => {
+    carregarAmbientes();
+  }, [cargoUsuario]);
+
+  // 📌 Carregar lista de disciplinas para seleção
+  useEffect(() => {
+    api.get("/disciplinas/")
+      .then((res) => setDisciplinas(res.data || []))
+      .catch((err) => console.error("Erro ao buscar disciplinas:", err));
+  }, []);
+
+  // 📌 Adicionar ou Atualizar Ambiente (apenas gestores)
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const ambienteData = {
+      data_inicio: dataInicio,
+      data_termino: dataTermino,
+      periodo,
+      sala_reservada: salaReservada,
+      disciplina_professor: disciplinaProfessor,
+    };
+
+    api.post("/reservaAmbiente/", ambienteData)
+      .then(() => {
+        alert("Ambiente reservado com sucesso!");
+        carregarAmbientes();  // 🔥 Atualiza a lista imediatamente após reserva
+        resetForm();
+      })
+      .catch((error) => {
+        console.error("Erro ao reservar ambiente:", error.response);
+        alert(`Erro ao reservar ambiente: ${error.response?.data?.message || "Erro desconhecido"}`);
+      });
+  };
+
+  // 📌 Excluir ambiente (apenas gestores)
+  const handleDelete = (id) => {
+    if (window.confirm("Tem certeza que deseja excluir esta reserva?")) {
+      api.delete(`/reservaAmbiente/${id}/`)
+        .then(() => {
+          alert("Reserva excluída com sucesso!");
+          carregarAmbientes();  // 🔥 Atualiza a lista imediatamente após exclusão
+        })
+        .catch(() => alert("Erro ao excluir reserva!"));
+    }
+  };
+
+  // 📌 Resetar formulário após envio
+  const resetForm = () => {
+    setEditingId(null);
+    setDataInicio("");
+    setDataTermino("");
+    setPeriodo("M");
+    setSalaReservada("1");
+    setDisciplinaProfessor("");
+  };
+
+  return (
+    <div>
+      <h1>Gestão de Ambientes</h1>
+
+      {/* 📌 Exibir formulário apenas para gestores */}
+      {cargoUsuario === "gestor" && (
+        <form onSubmit={handleSubmit}>
+          <input type="date" value={dataInicio} onChange={(e) => setDataInicio(e.target.value)} required />
+          <input type="date" value={dataTermino} onChange={(e) => setDataTermino(e.target.value)} required />
+
+          {/* Select para período */}
+          <select value={periodo} onChange={(e) => setPeriodo(e.target.value)} required>
+            <option value="M">Manhã</option>
+            <option value="T">Tarde</option>
+            <option value="N">Noite</option>
+          </select>
+
+          {/* Select para sala reservada */}
+          <select value={salaReservada} onChange={(e) => setSalaReservada(e.target.value)} required>
+            <option value="1">Sala 1</option>
+            <option value="2">Sala 2</option>
+            <option value="3">Sala 3</option>
+            <option value="4">Sala 4</option>
+            <option value="5">Sala 5</option>
+          </select>
+
+          {/* Select para disciplina */}
+          <select value={disciplinaProfessor} onChange={(e) => setDisciplinaProfessor(e.target.value)} required>
+            <option value="">Selecione uma disciplina</option>
+            {disciplinas.map((disciplina) => (
+              <option key={disciplina.id} value={disciplina.id}>
+                {disciplina.nome} - {disciplina.curso}
+              </option>
+            ))}
+          </select>
+
+          <button type="submit">{editingId ? "Atualizar" : "Reservar Ambiente"}</button>
+        </form>
+      )}
+
+      {/* 📌 Lista de ambientes */}
+      <ul>
+        {ambientes.map((ambiente) => (
+          <li key={ambiente.id}>
+            <strong>{ambiente.sala_reservada}</strong> - {ambiente.periodo}
+            <br />
+            📚 Disciplina: {ambiente.disciplina_nome}
+            <br />
+            🗓 {new Date(ambiente.data_inicio).toLocaleDateString()} - {new Date(ambiente.data_termino).toLocaleDateString()}
+          </li>
+        ))}
+      </ul>
+
+    </div>
+  );
+}
+
+export default GestaoAmbientes;

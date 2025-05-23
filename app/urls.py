@@ -4,7 +4,9 @@ from .views import *
 urlpatterns = [
     path('token/', LoginView.as_view()),
     path('professores/', ProfessorListCreateApiView.as_view()),
+    path('gestores/', GestorListCreateApiView.as_view()),
     path('professores/<int:pk>/', ProfessorDeleteUpdate.as_view()),
+    path('gestores/<int:pk>/', GestorDeleteUpdate.as_view()),
     path('disciplinas/', DisciplinasListCreateApiView.as_view()),
     path('disciplinas/<int:pk>/', DisciplinasDeleteUpdate.as_view()),
     path('reservaAmbiente/', AmbientesListCreateApiView.as_view()),

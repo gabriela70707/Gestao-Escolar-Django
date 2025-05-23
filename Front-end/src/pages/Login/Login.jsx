@@ -7,14 +7,13 @@ function Login() {
   const [isActive, setIsActive] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [tipoLogin, setTipoLogin] = useState("gestor"); // Define se é login de gestor ou professor
-  
+
   const navigate = useNavigate();
 
-  const handleLogin = async () => {
-    console.log("handleLogin foi chamado!"); // Verifica se a função está sendo executada
+  // 📌 Função de login agora recebe `tipoLogin` diretamente
+  const handleLogin = async (tipoLogin) => {
+    console.log("handleLogin foi chamado!");
 
-    // Verifica se os campos foram preenchidos
     if (!username || !password) {
       alert("Preencha todos os campos!");
       return;
@@ -26,7 +25,7 @@ function Login() {
         password
       });
 
-      console.log("Resposta do servidor:", response.data); // Exibe a resposta do backend
+      console.log("Resposta do servidor:", response.data);
 
       const cargoBackend = response.data.cargo;
       localStorage.setItem("accessToken", response.data.access);
@@ -35,14 +34,13 @@ function Login() {
       console.log("Cargo do Backend:", cargoBackend);
       console.log("Tipo de Login Selecionado:", tipoLogin);
 
-      // Verifica se o cargo do backend corresponde ao tipo de login escolhido
+      // 📌 Agora `tipoLogin` é passado corretamente no clique do botão
       if (cargoBackend !== tipoLogin) {
         alert("Você está tentando logar na área errada! Por favor, use a área correta.");
-        localStorage.removeItem("accessToken"); // Remove token para evitar acessos indevidos
+        localStorage.removeItem("accessToken");
         return;
       }
 
-      // Redireciona para a página home após login bem-sucedido
       navigate("/home");
 
     } catch (error) {
@@ -62,7 +60,7 @@ function Login() {
             <span>Use seu nome de Usuário</span>
             <input type="text" placeholder="Nome de Usuário" onChange={(e) => setUsername(e.target.value)} />
             <input type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
-            <button onClick={() => { setTipoLogin("gestor"); handleLogin(); }}>Entrar</button>
+            <button onClick={() => handleLogin("gestor")}>Entrar</button> {/* 🚀 Correção aqui */}
           </form>
         </div>
 
@@ -73,7 +71,7 @@ function Login() {
             <span>Use seu nome de Usuário</span>
             <input type="text" placeholder="Nome de Usuário" onChange={(e) => setUsername(e.target.value)} />
             <input type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
-            <button onClick={() => { setTipoLogin("professor"); handleLogin(); }}>Entrar</button>
+            <button onClick={() => handleLogin("professor")}>Entrar</button> {/* 🚀 Correção aqui */}
           </form>
         </div>
 
@@ -83,12 +81,12 @@ function Login() {
             <div className={`${stylesLogin.togglePanel} ${stylesLogin.toggleLeft}`}>
               <h1>É professor(a)?</h1>
               <p>Clique no botão abaixo:</p>
-              <button className={stylesLogin.hidden} onClick={() => { setIsActive(false); setTipoLogin("professor"); }}>Sou Professor</button>
+              <button className={stylesLogin.hidden} onClick={() => setIsActive(false)}>Sou Professor</button>
             </div>
             <div className={`${stylesLogin.togglePanel} ${stylesLogin.toggleRight}`}>
               <h1>É Gestor(a)?</h1>
               <p>Clique no botão abaixo:</p>
-              <button className={stylesLogin.hidden} onClick={() => { setIsActive(true); setTipoLogin("gestor"); }}>Sou Gestor</button>
+              <button className={stylesLogin.hidden} onClick={() => setIsActive(true)}>Sou Gestor</button>
             </div>
           </div>
         </div>
