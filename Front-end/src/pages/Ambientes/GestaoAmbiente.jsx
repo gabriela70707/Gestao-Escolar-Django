@@ -17,7 +17,7 @@ function GestaoAmbientes() {
   // 📌 Função para carregar lista de ambientes
   const carregarAmbientes = () => {
     const endpoint = cargoUsuario === "gestor" ? "/reservaAmbiente/" : "/professoresReservas/";
-    
+
     api.get(endpoint)
       .then((res) => {
         console.log("Ambientes carregados:", res.data);
@@ -26,7 +26,7 @@ function GestaoAmbientes() {
       .catch((err) => console.error("Erro ao buscar ambientes:", err));
   };
 
-  // 📌 Carregar lista de ambientes ao iniciar e após reserva/exclusão
+  // 📌 Carregar lista de ambientes ao iniciar e após qualquer alteração
   useEffect(() => {
     carregarAmbientes();
   }, [cargoUsuario]);
@@ -50,16 +50,26 @@ function GestaoAmbientes() {
       disciplina_professor: disciplinaProfessor,
     };
 
-    api.post("/reservaAmbiente/", ambienteData)
-      .then(() => {
-        alert("Ambiente reservado com sucesso!");
-        carregarAmbientes();  // 🔥 Atualiza a lista imediatamente após reserva
-        resetForm();
-      })
-      .catch((error) => {
-        console.error("Erro ao reservar ambiente:", error.response);
-        alert(`Erro ao reservar ambiente: ${error.response?.data?.message || "Erro desconhecido"}`);
-      });
+    if (editingId) {
+      api.put(`/reservaAmbiente/${editingId}/`, ambienteData)
+        .then(() => {
+          alert("Reserva atualizada com sucesso!");
+          carregarAmbientes();
+          resetForm();
+        })
+        .catch(() => alert("Erro ao atualizar reserva!"));
+    } else {
+      api.post("/reservaAmbiente/", ambienteData)
+        .then(() => {
+          alert("Ambiente reservado com sucesso!");
+          carregarAmbientes();
+          resetForm();
+        })
+        .catch((error) => {
+          console.error("Erro ao reservar ambiente:", error.response);
+          alert(`Erro ao reservar ambiente: ${error.response?.data?.message || "Erro desconhecido"}`);
+        });
+    }
   };
 
   // 📌 Excluir ambiente (apenas gestores)
@@ -68,10 +78,20 @@ function GestaoAmbientes() {
       api.delete(`/reservaAmbiente/${id}/`)
         .then(() => {
           alert("Reserva excluída com sucesso!");
-          carregarAmbientes();  // 🔥 Atualiza a lista imediatamente após exclusão
+          carregarAmbientes();
         })
         .catch(() => alert("Erro ao excluir reserva!"));
     }
+  };
+
+  // 📌 Iniciar edição de ambiente (apenas gestores)
+  const handleEdit = (ambiente) => {
+    setEditingId(ambiente.id);
+    setDataInicio(ambiente.data_inicio);
+    setDataTermino(ambiente.data_termino);
+    setPeriodo(ambiente.periodo);
+    setSalaReservada(ambiente.sala_reservada);
+    setDisciplinaProfessor(ambiente.disciplina_professor);
   };
 
   // 📌 Resetar formulário após envio
@@ -133,6 +153,14 @@ function GestaoAmbientes() {
             📚 Disciplina: {ambiente.disciplina_nome}
             <br />
             🗓 {new Date(ambiente.data_inicio).toLocaleDateString()} - {new Date(ambiente.data_termino).toLocaleDateString()}
+            <br />
+            {/* 📌 Exibir botões de editar/excluir apenas para gestores */}
+            {cargoUsuario === "gestor" && (
+              <>
+                <button onClick={() => handleEdit(ambiente)}>Editar</button>
+                <button onClick={() => handleDelete(ambiente.id)}>Excluir</button>
+              </>
+            )}
           </li>
         ))}
       </ul>

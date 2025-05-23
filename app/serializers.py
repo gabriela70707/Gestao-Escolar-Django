@@ -7,7 +7,7 @@ class UsuarioSerializer(serializers.ModelSerializer): #precisa definir username 
         model = Usuario
         fields = '__all__'
 
-        
+
 class AmbienteSerializer(serializers.ModelSerializer):
     disciplina_nome = serializers.CharField(source="disciplina_professor.nome", read_only=True)
     disciplina_professor = serializers.PrimaryKeyRelatedField(queryset=Disciplina.objects.all())  # Permite entrada
@@ -20,6 +20,8 @@ class AmbienteSerializer(serializers.ModelSerializer):
     
 
 class DisciplinasSerializer(serializers.ModelSerializer):
+    professor_nome = serializers.CharField(source="professor_responsavel.nome", read_only=True)
+    
     class Meta:
         model = Disciplina
         fields = '__all__'

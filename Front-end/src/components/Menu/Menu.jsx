@@ -29,13 +29,13 @@ export function Menu() {
                     </div>
                 </Link>
 
-                <div className={styles.disciplina}>
+                <Link to="/disciplinas" className={styles.disciplina}>
                     <img src={disciplinaImagem} alt="Disciplinas"/>
                     <div className={styles.text}>
                         <h2>Disciplinas</h2>
                         <p>descrição: sdalskdjasjdlka dasdasdasdasdas</p>
                     </div>
-                </div>
+                </Link>
 
                 <Link to="/ambientes" className={styles.ambiente}>
                     <img src={ambienteImagem} alt="Ambientes"/>

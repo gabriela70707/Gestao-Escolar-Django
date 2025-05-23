@@ -3,6 +3,7 @@ import Login from "./pages/Login/Login";
 import GestaoProfessores from "./pages/Professores/GestaoProfessores";
 import GestaoGestores from "./pages/Gestores/GestaoGestores";
 import GestaoAmbientes from "./pages/Ambientes/GestaoAmbiente";
+import GestaoDisciplinas from "./pages/Disciplinas/GestaoDisciplinas";
 import { NavBar } from "./components/NavBar/NavBar";
 import { Header } from "./components/Header/Header";
 import { Content } from "./components/Content/Content";
@@ -35,6 +36,7 @@ function App() {
         <Route path="/professores" element={<GestaoProfessores />} />
         <Route path="/gestores" element={<GestaoGestores />} />
         <Route path="/ambientes" element={<GestaoAmbientes />} />
+        <Route path="/disciplinas" element={<GestaoDisciplinas />} />
       </Routes>
     </Router>
   );
