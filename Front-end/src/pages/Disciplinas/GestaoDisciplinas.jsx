@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import api from "../../../service/api";
+import styles from "../Ambientes/GestaoAmbiente.module.css";
 
 function GestaoDisciplinas() {
   const [disciplinas, setDisciplinas] = useState([]);
@@ -104,12 +105,12 @@ function GestaoDisciplinas() {
   };
 
   return (
-    <div>
+    <div className={styles.main}>
       <h1>Gestão de Disciplinas</h1>
 
       {/* 📌 Exibir formulário apenas para gestores */}
       {cargoUsuario === "gestor" && (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className={styles.container}>
           <input type="text" placeholder="Nome da Disciplina" value={nome} onChange={(e) => setNome(e.target.value)} required />
           <input type="text" placeholder="Curso" value={curso} onChange={(e) => setCurso(e.target.value)} required />
           <input type="number" placeholder="Carga Horária" value={cargaHoraria} onChange={(e) => setCargaHoraria(e.target.value)} required />
@@ -130,21 +131,23 @@ function GestaoDisciplinas() {
       )}
 
       {/* 📌 Lista de disciplinas */}
-        <ul>
+        <ul className={styles.lista}>
             {disciplinas.map((disciplina) => (
-                <li key={disciplina.id}>
-                <strong>{disciplina.nome}</strong> - {disciplina.curso}
-                <br />
-                ⏳ Carga Horária: {disciplina.carga_horaria}h
-                <br />
-                📚 Professor: {disciplina.professor_nome}  
-                <br />
-                📝 {disciplina.descricao}
-                <br />
+                <li key={disciplina.id} className={styles.itensLista}>
+                  <div className={styles.textos}>
+                    <strong>{disciplina.nome}</strong> - {disciplina.curso}
+                    <br />
+                    ⏳ Carga Horária: {disciplina.carga_horaria}h
+                    <br />
+                    📚 Professor: {disciplina.professor_nome}  
+                    <br />
+                    📝 {disciplina.descricao}
+                    <br />
+                </div>
                 {cargoUsuario === "gestor" && (
                     <>
-                    <button onClick={() => handleEdit(disciplina)}>Editar</button>
-                    <button onClick={() => handleDelete(disciplina.id)}>Excluir</button>
+                    <button className={styles.editar} onClick={() => handleEdit(disciplina)}>Editar</button>
+                    <button className={styles.excluir} onClick={() => handleDelete(disciplina.id)}>Excluir</button>
                     </>
                 )}
                 </li>

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import api from "../../../service/api";
+import styles from "../Ambientes/GestaoAmbiente.module.css";
 
 function GestaoGestores() {
   const [gestores, setGestores] = useState([]);
@@ -95,12 +96,12 @@ function GestaoGestores() {
   };
 
   return (
-    <div>
+    <div className={styles.main}>
       <h1>Gestão de Gestores</h1>
 
       {/* 📌 Exibir formulário apenas para gestores */}
       {cargoUsuario === "gestor" && (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className={styles.container}>
           <input type="text" placeholder="NI" value={NI} onChange={(e) => setNI(e.target.value)} required />
           <input type="text" placeholder="Nome" value={nome} onChange={(e) => setNome(e.target.value)} required />
           <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
@@ -112,16 +113,16 @@ function GestaoGestores() {
       )}
 
       {/* 📌 Lista de gestores */}
-      <ul>
+      <ul className={styles.lista}>
         {gestores.map((gestor) => (
-          <li key={gestor.id}>
-            {gestor.nome} - {gestor.email}
+          <li key={gestor.id} className={styles.itensLista}>
+            <div className={styles.textos}>{gestor.nome} - {gestor.email}</div>
 
             {/* 📌 Exibir botões de editar/excluir apenas para gestores */}
             {cargoUsuario === "gestor" && (
               <>
-                <button onClick={() => handleEdit(gestor)}>Editar</button>
-                <button onClick={() => handleDelete(gestor.id)}>Excluir</button>
+                <button className={styles.editar} onClick={() => handleEdit(gestor)}>Editar</button>
+                <button className={styles.excluir} onClick={() => handleDelete(gestor.id)}>Excluir</button>
               </>
             )}
           </li>

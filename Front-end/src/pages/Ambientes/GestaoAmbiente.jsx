@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import api from "../../../service/api";
+import styles from "./GestaoAmbiente.module.css";
 
 function GestaoAmbientes() {
   const [ambientes, setAmbientes] = useState([]);
@@ -105,12 +106,12 @@ function GestaoAmbientes() {
   };
 
   return (
-    <div>
+    <div className={styles.main}>
       <h1>Gestão de Ambientes</h1>
 
       {/* 📌 Exibir formulário apenas para gestores */}
       {cargoUsuario === "gestor" && (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className={styles.container}>
           <input type="date" value={dataInicio} onChange={(e) => setDataInicio(e.target.value)} required />
           <input type="date" value={dataTermino} onChange={(e) => setDataTermino(e.target.value)} required />
 
@@ -145,20 +146,22 @@ function GestaoAmbientes() {
       )}
 
       {/* 📌 Lista de ambientes */}
-      <ul>
+      <ul className={styles.lista}>
         {ambientes.map((ambiente) => (
-          <li key={ambiente.id}>
-            <strong>{ambiente.sala_reservada}</strong> - {ambiente.periodo}
-            <br />
-            📚 Disciplina: {ambiente.disciplina_nome}
-            <br />
-            🗓 {new Date(ambiente.data_inicio).toLocaleDateString()} - {new Date(ambiente.data_termino).toLocaleDateString()}
-            <br />
+          <li key={ambiente.id} className={styles.itensLista}>
+            <div className={styles.textos}>
+              <strong>{ambiente.sala_reservada}</strong> - {ambiente.periodo}
+              <br />
+              📚 Disciplina: {ambiente.disciplina_nome}
+              <br />
+              🗓 {new Date(ambiente.data_inicio).toLocaleDateString()} - {new Date(ambiente.data_termino).toLocaleDateString()}
+              <br />
+            </div>
             {/* 📌 Exibir botões de editar/excluir apenas para gestores */}
             {cargoUsuario === "gestor" && (
               <>
-                <button onClick={() => handleEdit(ambiente)}>Editar</button>
-                <button onClick={() => handleDelete(ambiente.id)}>Excluir</button>
+                <button className={styles.editar} onClick={() => handleEdit(ambiente)}>Editar</button>
+                <button className={styles.excluir} onClick={() => handleDelete(ambiente.id)}>Excluir</button>
               </>
             )}
           </li>
