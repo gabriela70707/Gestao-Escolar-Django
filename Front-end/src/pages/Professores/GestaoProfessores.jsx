@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
 import api from "../../../service/api";
+import styles from "../Ambientes/GestaoAmbiente.module.css";
+import { Voltar } from "../../components/SetaVoltar/Voltar";
+
 
 function GestaoProfessores() {
   const [professores, setProfessores] = useState([]);
@@ -96,12 +99,16 @@ function GestaoProfessores() {
   };
 
   return (
-    <div>
-      <h1>Gestão de Professores</h1>
+    <div className={styles.main}>
+      
+            <div className={styles.topo }>
+              <Voltar />
+              <h1>Gestão de Professores</h1>
+            </div>
 
       {/* 📌 Exibir formulário apenas para gestores */}
       {cargoUsuario === "gestor" && (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className={styles.container}>
           <input type="text" placeholder="NI" value={NI} onChange={(e) => setNI(e.target.value)} required />
           <input type="text" placeholder="Nome" value={nome} onChange={(e) => setNome(e.target.value)} required />
           <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
@@ -113,16 +120,16 @@ function GestaoProfessores() {
       )}
 
       {/* 📌 Lista de professores */}
-      <ul>
+      <ul className={styles.lista}>
         {professores.map((professor) => (
-          <li key={professor.id}>
+          <li key={professor.id} className={styles.itensLista}>
             {professor.nome} - {professor.email}
 
             {/* 📌 Exibir botões de editar/excluir apenas para gestores */}
             {cargoUsuario === "gestor" && (
               <>
-                <button onClick={() => handleEdit(professor)}>Editar</button>
-                <button onClick={() => handleDelete(professor.id)}>Excluir</button>
+                <button className={styles.editar} onClick={() => handleEdit(professor)}>Editar</button>
+                <button className={styles.excluir} onClick={() => handleDelete(professor.id)}>Excluir</button>
               </>
             )}
           </li>

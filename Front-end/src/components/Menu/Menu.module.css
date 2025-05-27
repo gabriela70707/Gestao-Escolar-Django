@@ -78,6 +78,10 @@
 
 }
 
+.Imagem{
+    margin-right: 30px;
+}
+
 
 .icones img{
     height: 17vh;
@@ -93,5 +97,6 @@
 }
 
 .text p{
-    width: 2.5vh;
+    width: 14vh;
+    
 }

@@ -56,11 +56,13 @@ function Login() {
         {/* Login de Gestor */}
         <div className={`${stylesLogin.formContainer} ${stylesLogin.gestor}`}>
           <form onSubmit={(e) => e.preventDefault()}>
-            <h1>Logar como Gestor(a)</h1>
-            <span>Use seu nome de Usuário</span>
-            <input type="text" placeholder="Nome de Usuário" onChange={(e) => setUsername(e.target.value)} />
-            <input type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
-            <button onClick={() => handleLogin("gestor")}>Entrar</button> {/* 🚀 Correção aqui */}
+            <div className={stylesLogin.formGestor}>
+              <h1>Logar como Gestor(a)</h1>
+              <span>Use seu nome de Usuário</span>
+              <input type="text" placeholder="Nome de Usuário" onChange={(e) => setUsername(e.target.value)} />
+              <input type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
+              <button onClick={() => handleLogin("gestor")}>Entrar</button>
+            </div> 
           </form>
         </div>
 
@@ -71,7 +73,7 @@ function Login() {
             <span>Use seu nome de Usuário</span>
             <input type="text" placeholder="Nome de Usuário" onChange={(e) => setUsername(e.target.value)} />
             <input type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
-            <button onClick={() => handleLogin("professor")}>Entrar</button> {/* 🚀 Correção aqui */}
+            <button onClick={() => handleLogin("professor")}>Entrar</button> 
           </form>
         </div>
 

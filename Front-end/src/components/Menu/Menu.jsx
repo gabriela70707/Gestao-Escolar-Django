@@ -17,15 +17,15 @@ export function Menu() {
                     <img src={professorImagem} alt="Professores"/>
                     <div className={styles.text}>
                         <h2>Professores</h2>
-                        <p>descrição: sdalskdjasjdlka dasdasdasdasdas</p>
+                        <p>Descrição: Visualizar Informações dos professores(as)</p>
                     </div>
                 </Link>
 
                 <Link to="/gestores" className={styles.gestor}>
-                    <img src={gestorImagem} alt="Gestores"/>
+                    <img className={styles.Imagem} src={gestorImagem} alt="Gestores"/>
                     <div className={styles.text}>
                         <h2>Gestores</h2>
-                        <p>descrição: sdalskdjasjdlka dasdasdasdasdas</p>
+                        <p>Descrição: Visualizar Informações dos gestores(as)</p>
                     </div>
                 </Link>
 
@@ -33,15 +33,15 @@ export function Menu() {
                     <img src={disciplinaImagem} alt="Disciplinas"/>
                     <div className={styles.text}>
                         <h2>Disciplinas</h2>
-                        <p>descrição: sdalskdjasjdlka dasdasdasdasdas</p>
+                        <p>Descrição: Visualizar Informações das Disciplinas</p>
                     </div>
                 </Link>
 
                 <Link to="/ambientes" className={styles.ambiente}>
-                    <img src={ambienteImagem} alt="Ambientes"/>
+                    <img className={styles.Imagem} src={ambienteImagem} alt="Ambientes"/>
                     <div className={styles.text}>
                         <h2>Ambientes</h2>
-                        <p>descrição: sdalskdjasjdlka dasdasdasdasdas</p>
+                        <p>Descrição: Visualizar Informações das Reservas de Ambiente</p>
                     </div>
                 </Link>
 

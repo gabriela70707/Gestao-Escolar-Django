@@ -13,12 +13,7 @@ export function NavBar() {
             </div>
 
             <nav className={`${styles.container} ${isOpen ? styles.open : styles.closed}`}>
-                <ul>
-                    <li>Escola</li>
-                    <li>Missão</li>
-                    <li>Visão</li>
-                    <li>Valores</li>
-                </ul>
+                <p>Deseja Sair?</p>
                 <button onClick={() => navigate("/")}>Sair</button>
             </nav>
         </>

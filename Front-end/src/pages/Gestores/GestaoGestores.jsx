@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import api from "../../../service/api";
 import styles from "../Ambientes/GestaoAmbiente.module.css";
+import { Voltar } from "../../components/SetaVoltar/Voltar";
 
 function GestaoGestores() {
   const [gestores, setGestores] = useState([]);
@@ -97,7 +98,11 @@ function GestaoGestores() {
 
   return (
     <div className={styles.main}>
-      <h1>Gestão de Gestores</h1>
+      
+      <div className={styles.topo }>
+        <Voltar />
+        <h1>Gestão de Gestores</h1>
+      </div>
 
       {/* 📌 Exibir formulário apenas para gestores */}
       {cargoUsuario === "gestor" && (

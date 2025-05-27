@@ -25,6 +25,16 @@ h1{
     border-radius: 2vh;
 }
 
+.topo{
+    display: flex;
+    gap: 33.5vw;
+    width: 80vw;
+    align-items: center;
+    justify-content: start;
+    padding: 0vw 0vw 0vw 2vw;
+    margin-right: 20vw;
+}
+
 input{
     background-color: #eee;
     border: none;

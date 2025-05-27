@@ -102,8 +102,11 @@ class GestorDeleteUpdate(RetrieveUpdateDestroyAPIView):
         return Response({"message": "Dados do Gestor atualizado com sucesso!"}, status=status.HTTP_200_OK)
 
     def destroy(self, request, *args, **kwargs):
-        super().destroy(request, *args, **kwargs)  # Executa a exclusão normalmente
-        return Response({"message": "Registro do gestor excluido com sucesso!"}, status=status.HTTP_204_NO_CONTENT) 
+        gestor_id = kwargs.get("pk")
+        print(f"Excluindo gestor com ID: {gestor_id}")  
+        super().destroy(request, *args, **kwargs)
+        return Response({"message": "Registro do gestor excluído com sucesso!"}, status=status.HTTP_204_NO_CONTENT)
+ 
 
 
 
