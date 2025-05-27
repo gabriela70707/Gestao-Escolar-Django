@@ -107,12 +107,21 @@ function GestaoDisciplinas() {
 
   return (
     <div className={styles.main}>
-      
-       <div className={styles.topo }>
+
+      {cargoUsuario === "gestor" && (
+        <div className={styles.topo }>
           <Voltar />
           <h1>Gestão de Disciplinas</h1>
         </div>
+      )}
 
+      {cargoUsuario != "gestor" && (
+        <div className={styles.topo }>
+          <Voltar />
+          <h1>oi de Disciplinas</h1>
+        </div>
+      )}
+      
       {/* 📌 Exibir formulário apenas para gestores */}
       {cargoUsuario === "gestor" && (
         <form onSubmit={handleSubmit} className={styles.container}>

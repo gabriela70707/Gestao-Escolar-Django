@@ -103,7 +103,7 @@ console.log("Dados enviados ao backend:", ambienteData);
     }
   };
 
-  // 📌 Iniciar edição de ambiente (apenas gestores)
+  // Iniciar edição de ambiente (apenas gestores)
   const handleEdit = (ambiente) => {
     setEditingId(ambiente.id);
     setDataInicio(ambiente.data_inicio);
@@ -113,7 +113,7 @@ console.log("Dados enviados ao backend:", ambienteData);
     setDisciplinaProfessor(ambiente.disciplina_professor);
   };
 
-  // 📌 Resetar formulário após envio
+  // Resetando o formulário após o envio
   const resetForm = () => {
     setEditingId(null);
     setDataInicio("");
