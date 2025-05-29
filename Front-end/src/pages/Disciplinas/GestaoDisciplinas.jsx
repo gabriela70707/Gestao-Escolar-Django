@@ -118,7 +118,7 @@ function GestaoDisciplinas() {
       {cargoUsuario != "gestor" && (
         <div className={styles.topo }>
           <Voltar />
-          <h1>oi de Disciplinas</h1>
+          <h1>Minhas Disciplinas</h1>
         </div>
       )}
       

@@ -18,11 +18,11 @@ function GestaoProfessores() {
   const cargoUsuario = localStorage.getItem("cargo"); // "gestor" ou "professor"
 
   // 📌 Carregar lista de professores
- useEffect(() => {
-  api.get("/professores/")
-    .then((res) => setProfessores(res.data))
-    .catch((err) => console.error("Erro ao buscar professores:", err));
-}, []);
+  useEffect(() => {
+    api.get("/professores/")
+      .then((res) => setProfessores(res.data))
+      .catch((err) => console.error("Erro ao buscar professores:", err));
+  }, []);
 
 
   const carregarProfessores = () => {
@@ -34,7 +34,7 @@ function GestaoProfessores() {
   // 📌 Adicionar ou Atualizar Professor (apenas para gestores)
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+
     const professorData = {
       NI,
       nome,
@@ -100,11 +100,20 @@ function GestaoProfessores() {
 
   return (
     <div className={styles.main}>
-      
-            <div className={styles.topo }>
-              <Voltar />
-              <h1>Gestão de Professores</h1>
-            </div>
+
+      {cargoUsuario === "gestor" && (
+        <div className={styles.topo}>
+          <Voltar />
+          <h1>Gestão de Professores</h1>
+        </div>
+      )}
+
+      {cargoUsuario != "gestor" && (
+        <div className={styles.topo}>
+          <Voltar />
+          <h1>Professores</h1>
+        </div>
+      )}
 
       {/* 📌 Exibir formulário apenas para gestores */}
       {cargoUsuario === "gestor" && (

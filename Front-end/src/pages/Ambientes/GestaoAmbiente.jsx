@@ -44,21 +44,21 @@ function GestaoAmbientes() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    date.setDate(date.getDate() + 1); // Adiciona um dia à data
-    return date.toISOString().split("T")[0]; // Mantém apenas YYYY-MM-DD
-};
+    const formatDate = (dateString) => {
+      const date = new Date(dateString);
+      date.setDate(date.getDate() + 1); // Adiciona um dia à data
+      return date.toISOString().split("T")[0]; // Mantém apenas YYYY-MM-DD
+    };
 
-const ambienteData = {
-    data_inicio: formatDate(dataInicio),
-    data_termino: formatDate(dataTermino),
-    periodo: periodo,
-    sala_reservada: salaReservada,
-    disciplina_professor: disciplinaProfessor
-};
+    const ambienteData = {
+      data_inicio: formatDate(dataInicio),
+      data_termino: formatDate(dataTermino),
+      periodo: periodo,
+      sala_reservada: salaReservada,
+      disciplina_professor: disciplinaProfessor
+    };
 
-console.log("Dados enviados ao backend:", ambienteData);
+    console.log("Dados enviados ao backend:", ambienteData);
 
 
 
@@ -125,10 +125,19 @@ console.log("Dados enviados ao backend:", ambienteData);
 
   return (
     <div className={styles.main}>
-      <div className={styles.topo}>
-        <Voltar />
-        <h1>Gestão de Ambientes</h1>
-      </div>
+      {cargoUsuario === "gestor" && (
+        <div className={styles.topo}>
+          <Voltar />
+          <h1>Gestão de Ambientes</h1>
+        </div>
+      )}
+
+      {cargoUsuario != "gestor" && (
+        <div className={styles.topo}>
+          <Voltar />
+          <h1>Minhas Reservas</h1>
+        </div>
+      )}
 
       {/* 📌 Exibir formulário apenas para gestores */}
       {cargoUsuario === "gestor" && (

@@ -32,7 +32,7 @@ function GestaoGestores() {
   // 📌 Adicionar ou Atualizar Gestor (apenas para gestores)
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+
     const gestorData = {
       NI,
       nome,
@@ -98,11 +98,20 @@ function GestaoGestores() {
 
   return (
     <div className={styles.main}>
-      
-      <div className={styles.topo }>
-        <Voltar />
-        <h1>Gestão de Gestores</h1>
-      </div>
+
+      {cargoUsuario === "gestor" && (
+        <div className={styles.topo}>
+          <Voltar />
+          <h1>Gestão de Gestores</h1>
+        </div>
+      )}
+
+      {cargoUsuario != "gestor" && (
+        <div className={styles.topo}>
+          <Voltar />
+          <h1>Gestores</h1>
+        </div>
+      )}
 
       {/* 📌 Exibir formulário apenas para gestores */}
       {cargoUsuario === "gestor" && (
