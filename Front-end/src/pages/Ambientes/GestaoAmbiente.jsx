@@ -61,14 +61,6 @@ function GestaoAmbientes() {
     console.log("Dados enviados ao backend:", ambienteData);
 
 
-
-
-
-
-
-
-
-
     if (editingId) {
       api.put(`/reservaAmbiente/${editingId}/`, ambienteData)
         .then(() => {
