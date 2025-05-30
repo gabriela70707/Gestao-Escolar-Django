@@ -75,6 +75,8 @@ pip install -r requirements.txt
 
 **✅ Pronto! Agora basta acessar as URLs desejadas. 🚀😃**
 
+##🚨 Alterar no settings as configurações do Banco de Dados conforme o necessário
+
 
 ## Link da Documentação completa - (documentado no Postman) 📚✨:
 https://documenter.getpostman.com/view/41931886/2sB2qWF3HB
