@@ -33,6 +33,18 @@ function GestaoGestores() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    // 🔍 Validação do NI (deve ter exatamente 5 dígitos)
+    if (!/^\d{5}$/.test(NI)) {
+      alert("O campo NI deve conter exatamente 5 dígitos numéricos!");
+      return;
+    }
+
+    // 🔍 Validação do telefone (deve ter exatamente 11 dígitos)
+    if (!/^\d{11}$/.test(telefone)) {
+      alert("O telefone deve conter exatamente 11 dígitos numéricos!");
+      return;
+    }
+
     const gestorData = {
       NI,
       nome,
@@ -116,10 +128,10 @@ function GestaoGestores() {
       {/* 📌 Exibir formulário apenas para gestores */}
       {cargoUsuario === "gestor" && (
         <form onSubmit={handleSubmit} className={styles.container}>
-          <input type="text" placeholder="NI" value={NI} onChange={(e) => setNI(e.target.value)} required />
+          <input type="text" placeholder="NI ( 5 Digitos)" value={NI} onChange={(e) => setNI(e.target.value)} required />
           <input type="text" placeholder="Nome" value={nome} onChange={(e) => setNome(e.target.value)} required />
           <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-          <input type="text" placeholder="Telefone" value={telefone} onChange={(e) => setTelefone(e.target.value)} required />
+          <input type="text" placeholder= "Telefone - 11 Digitos (Não use caracteres especiais)" value={telefone} onChange={(e) => setTelefone(e.target.value)} required />
           <input type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} required />
           <input type="password" placeholder="Senha" value={password} onChange={(e) => setPassword(e.target.value)} required />
           <button type="submit">{editingId ? "Atualizar" : "Adicionar"}</button>
