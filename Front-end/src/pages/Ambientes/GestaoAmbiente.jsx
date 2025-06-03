@@ -120,20 +120,20 @@ function GestaoAmbientes() {
       {cargoUsuario === "gestor" && (
         <div className={styles.topo}>
           <Voltar />
-          <h1>Gestão de Ambientes</h1>
         </div>
       )}
 
       {cargoUsuario != "gestor" && (
         <div className={styles.topo}>
           <Voltar />
-          <h1>Minhas Reservas</h1>
         </div>
       )}
 
       {/* 📌 Exibir formulário apenas para gestores */}
       {cargoUsuario === "gestor" && (
+        
         <form onSubmit={handleSubmit} className={styles.container}>
+          <h1 className={styles.gestorTitle}>Gestão de Ambientes</h1>
           <input type="date" value={dataInicio} onChange={(e) => setDataInicio(e.target.value)} required />
           <input type="date" value={dataTermino} onChange={(e) => setDataTermino(e.target.value)} required />
 
@@ -169,6 +169,9 @@ function GestaoAmbientes() {
 
       {/* 📌 Lista de ambientes */}
       <ul className={styles.lista}>
+        {cargoUsuario != "gestor" && (
+          <h1>Minhas Reservas</h1>
+      )}
         {ambientes.map((ambiente) => (
           <li key={ambiente.id} className={styles.itensLista}>
             <div className={styles.textos}>

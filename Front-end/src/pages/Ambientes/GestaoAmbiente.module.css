@@ -1,119 +1,122 @@
-@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
-*{
-    margin: 0;
-    padding: 0;
-    font-family: 'Poppins', sans-serif;
-}
+    *{
+        margin: 0;
+        padding: 0;
+        font-family: 'Poppins', sans-serif;
+    }
 
-h1{
-    padding: 4vh 0vh 1vh 3vh;
-}
-
-.main{
-    display: grid;
-    justify-content: center;
-    justify-items: center;
-    gap: 5vh;
-    background: linear-gradient(to right, #e2e2e2, #c9d6ff);
-}
-
-.container{
-    display: grid;
-    background-color: #5c6bc0;
-    width: 50vh;
-    border-radius: 2vh;
-}
-
-.topo{
-    display: flex;
-    gap: 33.5vw;
-    width: 80vw;
-    align-items: center;
-    justify-content: start;
-    padding: 0vw 0vw 0vw 2vw;
-    margin-right: 20vw;
-}
-
-input{
-    background-color: #eee;
-    border: none;
-    margin: 8px 0;
-    padding: 10px 15px;
-    font-size: 13px;
-    border-radius: 8px;
-    width: 100%;
-    outline: none;
-}
-
-select{
-    background-color: #eee;
-    border: none;
-    margin: 8px 0;
-    padding: 10px 15px;
-    font-size: 13px;
-    border-radius: 8px;
-    width: 100%;
-}
-
-textarea{
-    border: none;
-    outline: none;
-    resize: none;
-    background-color: #eee;
-    width: 21vw;
-    border-radius: 0.2vw;
-    padding: 2vh;
     
-}
 
-button{
-    background-color: #512da8;
-    color: #fff;
-    font-size: 12px;
-    padding: 10px 45px;
-    border: none;
-    border-radius: 8px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-    margin-top: 10px;
-    cursor: pointer;
-    transition: 0.3s;
-}
+    .main{
+        display: grid;
+        justify-content: center;
+        justify-items: center;
+        gap: 5vh;
+        background: linear-gradient(to right, #e2e2e2, #c9d6ff);
+        height: auto;
+        padding-bottom: 90vh;
+    }
 
-button:hover {
-    background-color: #5c6bc0;
-}
+    .container{
+        display: grid;
+        background-color: #5c6bc0;
+        width: 50vh;
+        border-radius: 2vh;
+    }
 
-.excluir{
-    background-color: rgb(235, 91, 91);
-}
+    .topo{
+        display: flex;
+        width: 80vw;
+        align-items: start;
+        justify-content: start;
+        padding: 0vw 0vw 0vw 2vw;
+        margin-right: 20vw;
+        margin-top: 2vh;
+    }
 
-.excluir:hover {
-    background-color: #ff9595;
-}
+    .gestorTitle{
+        color: aliceblue;
+    }
 
-.editar{
-    background-color: #6346a7;
-}
+    input{
+        background-color: #eee;
+        border: none;
+        margin: 8px 0;
+        padding: 10px 15px;
+        font-size: 13px;
+        border-radius: 8px;
+        width: 100%;
+        outline: none;
+    }
+
+    select{
+        background-color: #eee;
+        border: none;
+        margin: 8px 0;
+        padding: 10px 15px;
+        font-size: 13px;
+        border-radius: 8px;
+        width: 100%;
+    }
+
+    textarea{
+        border: none;
+        outline: none;
+        resize: none;
+        background-color: #eee;
+        width: 21vw;
+        border-radius: 0.2vw;
+        padding: 2vh;
+        
+    }
+
+    button{
+        background-color: #512da8;
+        color: #fff;
+        font-size: 12px;
+        padding: 10px 45px;
+        border: none;
+        border-radius: 8px;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        margin-top: 10px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    button:hover {
+        background-color: #5c6bc0;
+    }
+
+    .excluir{
+        background-color: rgb(235, 91, 91);
+    }
+
+    .excluir:hover {
+        background-color: #ff9595;
+    }
+
+    .editar{
+        background-color: #6346a7;
+    }
 
 
-.lista{
-    padding: 10vh;
-    display: grid;
-    gap: 10vh;
-}
+    .lista{
+        gap: 10vh;
+        display: grid;
+    }
 
-.itensLista{
-    display: grid;
-    background-color: #e3e8f5;   
-    border-radius: 2vh;
-    width: 20vw;
-    justify-content: center;
-    padding: 1vh 0 3vh; 
-}
+    .itensLista{
+        display: grid;
+        background-color: #e3e8f5;   
+        border-radius: 2vh;
+        width: 20vw;
+        justify-content: center;
+        padding: 1vh 0 3vh; 
+    }
 
-.textos{
-    padding: 1vh;
-}
+    .textos{
+        padding: 1vh;
+    }

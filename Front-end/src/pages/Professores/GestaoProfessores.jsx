@@ -116,20 +116,19 @@ function GestaoProfessores() {
       {cargoUsuario === "gestor" && (
         <div className={styles.topo}>
           <Voltar />
-          <h1>Gestão de Professores</h1>
         </div>
       )}
 
       {cargoUsuario != "gestor" && (
         <div className={styles.topo}>
           <Voltar />
-          <h1>Professores</h1>
         </div>
       )}
 
       {/* 📌 Exibir formulário apenas para gestores */}
       {cargoUsuario === "gestor" && (
         <form onSubmit={handleSubmit} className={styles.container}>
+          <h1 className={styles.gestorTitle}>Gestão de Professores</h1>
           <input type="text" placeholder="NI ( 5 Digitos)" value={NI} onChange={(e) => setNI(e.target.value)} required />
           <input type="text" placeholder="Nome" value={nome} onChange={(e) => setNome(e.target.value)} required />
           <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
@@ -142,6 +141,9 @@ function GestaoProfessores() {
 
       {/* 📌 Lista de professores */}
       <ul className={styles.lista}>
+        {cargoUsuario != "gestor" && (
+          <h1>Professores</h1>
+        )}
         {professores.map((professor) => (
           <li key={professor.id} className={styles.itensLista}>
             {professor.nome} - {professor.email}

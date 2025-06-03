@@ -109,22 +109,22 @@ function GestaoDisciplinas() {
     <div className={styles.main}>
 
       {cargoUsuario === "gestor" && (
-        <div className={styles.topo }>
+        <div className={styles.topo}>
           <Voltar />
-          <h1>Gestão de Disciplinas</h1>
         </div>
       )}
 
       {cargoUsuario != "gestor" && (
-        <div className={styles.topo }>
+        <div className={styles.topo}>
           <Voltar />
-          <h1>Minhas Disciplinas</h1>
+          
         </div>
       )}
       
       {/* 📌 Exibir formulário apenas para gestores */}
       {cargoUsuario === "gestor" && (
         <form onSubmit={handleSubmit} className={styles.container}>
+          <h1 className={styles.gestorTitle}>Gestão de Disciplinas</h1>
           <input type="text" placeholder="Nome da Disciplina" value={nome} onChange={(e) => setNome(e.target.value)} required />
           <input type="text" placeholder="Curso" value={curso} onChange={(e) => setCurso(e.target.value)} required />
           <input type="number" placeholder="Carga Horária" value={cargaHoraria} onChange={(e) => setCargaHoraria(e.target.value)} required />
@@ -146,6 +146,9 @@ function GestaoDisciplinas() {
 
       {/* 📌 Lista de disciplinas */}
         <ul className={styles.lista}>
+          {cargoUsuario != "gestor" && (
+              <h1>Minhas Disciplinas</h1>
+          )}
             {disciplinas.map((disciplina) => (
                 <li key={disciplina.id} className={styles.itensLista}>
                   <div className={styles.textos}>
