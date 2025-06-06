@@ -62,6 +62,12 @@ cd .\env\Scripts\
 ```bash
 pip install -r requirements.txt 
 ```
+Instale também o cors:
+
+```bash
+pip install django-cors-headers
+```
+
 
 **Caso queira verificar se as dependencias foram instaladas use o comando:**
 
