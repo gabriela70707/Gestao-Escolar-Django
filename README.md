@@ -21,14 +21,23 @@ pertinentes às suas atividades.
 ## EndPoint's ⚡:
 
 token/ - login 
-professores/  - consultar e cadastrar professores (de acordo com a permissão)
-professores/<int:pk>/  - atualizar e deletar professores (de acordo com a permissão)
-disciplinas/ - consultar e cadastrar disciplinas (de acordo com a permissão)
-disciplinas/<int:pk>/  - atualizar e deletar disciplinas (de acordo com a permissão)
-reservaAmbiente/ - consultar e cadastrar reservas (de acordo com a permissão)
-reservaAmbiente/<int:pk>/ - atualizar e deletar disciplinas (de acordo com a permissão)
-professoresReservas/ - professor consulta suas reservas
-professoresDisciplinas/ - professor consulta suas disciplinas
+professores/  - consultar e cadastrar professores (de acordo com a permissão).
+
+professores/<int:pk>/  - atualizar e deletar professores (de acordo com a permissão).
+
+disciplinas/ - consultar e cadastrar disciplinas (de acordo com a permissão).
+
+disciplinas/<int:pk>/  - atualizar e deletar disciplinas (de acordo com a permissão).
+
+reservaAmbiente/ - consultar e cadastrar reservas (de acordo com a permissão).
+
+reservaAmbiente/<int:pk>/ - atualizar e deletar disciplinas (de acordo com a permissão).
+
+professoresReservas/ - professor consulta suas reservas.
+
+professoresDisciplinas/ - professor consulta suas disciplinas.
+
+---
 
 # Como Rodar o Projeto - (Back-End)🚀:
 
